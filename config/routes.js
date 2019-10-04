@@ -11,4 +11,7 @@
 module.exports.routes = {
   // HealthController
   'GET /knockknock': 'HealthController.check',
+
+  // ScheduleController
+  'POST /v1/schedules': 'ScheduleController.createSchedule'
 };
