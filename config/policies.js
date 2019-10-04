@@ -13,6 +13,10 @@ module.exports.policies = {
 
   HealthController: {
     check: []
+  },
+
+  ScheduleController: {
+    createSchedule: []
   }
 
 };
