@@ -8,6 +8,7 @@
     "@sailshq/connect-redis": "3.2.1",
     "@sailshq/lodash": "3.10.3",
     "@sailshq/socket.io-redis": "5.2.0",
+    "ajv": "6.10.2",
     "async": "3.1.0",
     "cron": "1.7.2",
     "dotenv": "8.1.0",
