@@ -16,7 +16,7 @@ module.exports.policies = {
   },
 
   ScheduleController: {
-    createSchedule: []
+    createSchedule: ['validateCreateSchedule']
   }
 
 };
