@@ -12,7 +12,7 @@ module.exports = {
       body: _.get(data, 'body', {}),
       json: true
     }, (err, response) => {
-      return cb(err, response)
+      return cb(err, response);
     });
   },
 
@@ -35,5 +35,14 @@ module.exports = {
     else {
       return;
     }
+  },
+
+  getTimeInIst: () => {
+    let currentTime = new Date(),
+      currentOffset = currentTime.getTimezoneOffset(),
+      ISTOffset = 330,
+      ISTTime = new Date(currentTime.getTime() + (ISTOffset + currentOffset) * 60000);
+
+    return ISTTime.toDateString() + ' ' + ISTTime.getHours() + ':' + ISTTime.getMinutes();
   }
 };

@@ -9,6 +9,28 @@
  * https://sailsjs.com/config/bootstrap
  */
 
-module.exports.bootstrap = async function() {
+const cron = require('cron'),
+  CronJob = cron.CronJob,
 
+  TIMEZONE = 'Asia/Kolkata';
+
+module.exports.bootstrap = function(cb) {
+  sails.log('\nSetting up the process cron to run every 5 minutes\n.');
+
+  try {
+    new CronJob('*/5 * * * *', () => {
+      CronService.process((err) => {
+        if (err) {
+          sails.log.error(err);
+        }
+
+        sails.log('Done processing schedules at : ', UtilService.getTimeInIst());
+      });
+    }, null, true, TIMEZONE);
+  }
+  catch (e) {
+    sails.log.error('Error setting up cron : ', e.message);
+  }
+
+  return cb();
 };
