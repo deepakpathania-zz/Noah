@@ -12,13 +12,22 @@ module.exports = {
           UtilService.makeRequest(body.request, (err) => {
             return next(err);
           });
+
+          /**
+           * @TODO Decide whether ot not a RunHistory record should
+           * be created for this case. Things to consider :
+           *  - schedule hasn't been created yet.
+           *  - nextRunningTime varies based on this.
+           */
         }
         else {
           return next(null);
         }
       },
       (next) => {
-        // Get the nextRunningTime for the schedule based on the period.
+        /**
+         * Get the nextRunningTime for the schedule based on the period.
+         */
         const nextRunningTime = UtilService.getNextRunningTime(body.period);
 
         if (!nextRunningTime) {
