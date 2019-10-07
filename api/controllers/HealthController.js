@@ -14,7 +14,7 @@ module.exports = {
       (response, next) => {
         // If reading fails, try writing.
         if (!response) {
-          Health
+          return Health
             .create({
               id: 1
             })
@@ -24,7 +24,7 @@ module.exports = {
         }
 
         // Update the record in case it was found during read.
-        Health
+        return Health
           .update({
             id: 1
           })

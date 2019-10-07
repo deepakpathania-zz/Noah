@@ -46,6 +46,15 @@
     "sails": true,
     "_": true,
     "async": true,
+    "before": true,
+    "beforeEach": true,
+    "after": true,
+    "afterEach": true,
+    "describe": true,
+    "it": true,
+    "app": true,
+    "expect": true,
+
 
     // models
     "Health": true,
