@@ -29,21 +29,12 @@
     "sinon": "7.5.0",
     "supertest": "4.0.2"
   },
-  "nyc": {
-    "include": [
-      "api/"
-    ],
-    "reporter": [
-      "text",
-      "text-summary"
-    ]
-  },
   "scripts": {
     "start": "NODE_ENV=production node app.js",
     "test": "npm run test-lint && npm run test-unit && npm run test-integration",
     "test-lint": "node npm/test-lint.js",
-    "test-unit": "nyc node npm/test-unit.js",
-    "test-integration": "nyc node npm/test-integration.js"
+    "test-unit": "nyc --reporter=text --reporter=text-summary --include api/policies/ --include api/services/UtilService.js node npm/test-unit.js",
+    "test-integration": "nyc --reporter=text --reporter=text-summary --include api/ --exclude api/services/UtilService.js node npm/test-integration.js"
   },
   "main": "app.js",
   "repository": {
