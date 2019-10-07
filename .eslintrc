@@ -21,10 +21,15 @@
   // you would visit `http://eslint.org/docs/rules/no-sequences`.  If you're unsure
   // or could use some advice, come by https://sailsjs.com/support.
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
+  
   "env": {
     "node": true
   },
+
+  "plugins": [
+    "lodash",
+    "security"
+  ],
 
   "parserOptions": {
     "ecmaVersion": 8,
@@ -39,9 +44,17 @@
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     "Promise": true,
     "sails": true,
-    "_": true
-    // …and any others (e.g. `"Organization": true`)
-    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    "_": true,
+    "async": true,
+
+    // models
+    "Health": true,
+    "Schedule": true,
+    "Runhistory": true,
+
+    // services
+    "UtilService": true,
+    "CronService": true
   },
 
   "rules": {
@@ -73,7 +86,7 @@
     "no-return-assign":             ["error", "always"],
     "no-sequences":                 ["error"],
     "no-trailing-spaces":           ["warn"],
-    "no-undef":                     ["off"],
+    "no-undef":                     ["error"],
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     // ^^Note: If this "no-undef" rule is enabled (set to `["error"]`), then all model globals
     // (e.g. `"Organization": true`) should be included above under "globals".
@@ -86,7 +99,107 @@
     "quotes":                       ["warn", "single", {"avoidEscape":false, "allowTemplateLiterals":true}],
     "semi":                         ["warn", "always"],
     "semi-spacing":                 ["warn", {"before":false, "after":true}],
-    "semi-style":                   ["warn", "last"]
+    "semi-style":                   ["warn", "last"],
+
+    // Lodash
+    "lodash/callback-binding": "error",
+    "lodash/collection-method-value": "warn",
+    "lodash/collection-return": "error",
+    "lodash/no-double-unwrap": "error",
+    "lodash/no-extra-args": "error",
+    "lodash/no-unbound-this": "error",
+    "lodash/unwrap": "error",
+    "lodash/chain-style": [
+        "error",
+        "as-needed"
+    ],
+    "lodash/chaining": [
+        "error",
+        "always",
+        3
+    ],
+    "lodash/consistent-compose": [
+        "error",
+        "flow"
+    ],
+    "lodash/identity-shorthand": [
+        "error",
+        "always"
+    ],
+    "lodash/import-scope": "off",
+    "lodash/matches-prop-shorthand": [
+        "error",
+        "always"
+    ],
+    "lodash/matches-shorthand": [
+        "error",
+        "always",
+        3
+    ],
+    "lodash/no-commit": "error",
+    "lodash/path-style": [
+        "error",
+        "as-needed"
+    ],
+    "lodash/prefer-compact": "error",
+    "lodash/prefer-filter": [
+        "off",
+        3
+    ],
+    "lodash/prefer-find": "error",
+    "lodash/prefer-flat-map": "error",
+    "lodash/prefer-immutable-method": "error",
+    "lodash/prefer-invoke-map": "error",
+    "lodash/prefer-map": "error",
+    "lodash/prefer-reject": [
+        "error",
+        3
+    ],
+    "lodash/prefer-thru": "error",
+    "lodash/prefer-wrapper-method": "error",
+    "lodash/preferred-alias": "error",
+    "lodash/prop-shorthand": [
+        "error",
+        "always"
+    ],
+    "lodash/prefer-constant": "off",
+    "lodash/prefer-get": [
+        "warn",
+        4
+    ],
+    "lodash/prefer-includes": [
+        "error",
+        {
+            "includeNative": true
+        }
+    ],
+    "lodash/prefer-is-nil": "error",
+    "lodash/prefer-lodash-chain": "off",
+    "lodash/prefer-lodash-method": "off",
+    "lodash/prefer-lodash-typecheck": "off",
+    "lodash/prefer-matches": [
+        "off",
+        3
+    ],
+    "lodash/prefer-noop": "off",
+    "lodash/prefer-over-quantifier": "warn",
+    "lodash/prefer-some": "off",
+    "lodash/prefer-startswith": "off",
+    "lodash/prefer-times": "off",
+
+    // Security
+    "security/detect-unsafe-regex": "error",
+    "security/detect-buffer-noassert": "error",
+    "security/detect-child-process": "error",
+    "security/detect-disable-mustache-escape": "error",
+    "security/detect-eval-with-expression": "error",
+    "security/detect-no-csrf-before-method-override": "error",
+    "security/detect-non-literal-fs-filename": "off",
+    "security/detect-non-literal-regexp": "error",
+    "security/detect-non-literal-require": "error",
+    "security/detect-object-injection": "off",
+    "security/detect-possible-timing-attacks": "error",
+    "security/detect-pseudoRandomBytes": "error"
   }
 
 }
