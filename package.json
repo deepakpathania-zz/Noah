@@ -5,19 +5,14 @@
   "description": "Scheduling as a service.",
   "keywords": [],
   "dependencies": {
-    "@sailshq/connect-redis": "3.2.1",
     "@sailshq/lodash": "3.10.3",
-    "@sailshq/socket.io-redis": "5.2.0",
     "ajv": "6.10.2",
     "async": "3.1.0",
     "cron": "1.7.2",
     "dotenv": "8.1.0",
-    "grunt": "1.0.1",
     "request": "2.88.0",
     "sails": "1.1.0",
-    "sails-hook-grunt": "3.1.0",
     "sails-hook-orm": "2.1.1",
-    "sails-hook-sockets": "1.5.5",
     "sails-mysql": "1.0.1"
   },
   "devDependencies": {
@@ -28,6 +23,7 @@
     "eslint-plugin-security": "1.4.0",
     "mocha": "6.2.1",
     "mysql": "2.17.1",
+    "nock": "11.3.6",
     "nyc": "14.1.1",
     "recursive-readdir": "2.2.2",
     "sinon": "7.5.0",
@@ -44,11 +40,10 @@
   },
   "scripts": {
     "start": "NODE_ENV=production node app.js",
-    "test": "npm run lint && npm run custom-tests && echo 'Done.'",
+    "test": "npm run test-lint && npm run test-unit && npm run test-integration",
     "test-lint": "node npm/test-lint.js",
     "test-unit": "nyc node npm/test-unit.js",
-    "test-integration": "nyc node npm/test-integration.js",
-    "custom-tests": "echo \"(No other custom tests yet.)\" && echo"
+    "test-integration": "nyc node npm/test-integration.js"
   },
   "main": "app.js",
   "repository": {
