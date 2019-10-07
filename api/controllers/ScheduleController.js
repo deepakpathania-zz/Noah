@@ -31,7 +31,7 @@ module.exports = {
          * Get the nextRunningTime for the schedule based on the period.
          */
         const nextRunningTime = UtilService.getNextRunningTime(body.period),
-          identifier = crypto.randomBytes(16).toString('hex');  
+          identifier = crypto.randomBytes(16).toString('hex');
 
         if (!nextRunningTime) {
           return next(new Error('invalidSchedulePeriod'));
@@ -84,7 +84,7 @@ module.exports = {
             nextRunningTime: schedule.nextRunningTime,
             request: schedule.request,
             period: schedule.period
-          }
+          };
         });
 
         return res.json({
@@ -105,7 +105,7 @@ module.exports = {
           })
           .exec((err, schedule) => {
             if (err || !schedule) {
-              return next(new Error('scheduleFetchingError'))
+              return next(new Error('scheduleFetchingError'));
             }
 
             return next(null, schedule.id);
@@ -133,7 +133,7 @@ module.exports = {
           id: runhistory.id,
           runTime: runhistory.runTime,
           responseStatusCode: runhistory.responseStatusCode
-        }
+        };
       });
 
       return res.json({

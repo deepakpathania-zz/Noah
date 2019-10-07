@@ -26,8 +26,7 @@ const Ajv = require('ajv'),
               body: {
                 type: 'object'
               }
-            },
-            required: ['params', 'headers', 'body']
+            }
           }
         },
         required: ['url', 'method', 'data']
