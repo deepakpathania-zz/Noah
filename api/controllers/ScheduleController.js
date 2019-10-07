@@ -8,7 +8,7 @@ module.exports = {
          * If the start option is sent as true, then make a request
          * immediately and then create the schedule record.
          */
-        if (body.start) {
+        if (_.get(body, 'start', false)) {
           UtilService.makeRequest(body.request, (err) => {
             return next(err);
           });
