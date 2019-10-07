@@ -14,6 +14,9 @@ module.exports = {
       type: 'number',
       defaultsTo: 1
     },
+    identifier: {
+      type: 'string'
+    },
     period: {
       type: 'json'
     },

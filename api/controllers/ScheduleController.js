@@ -1,3 +1,5 @@
+const crypto = require('crypto');
+
 module.exports = {
   createSchedule: (req, res) => {
     const body = req.body;
@@ -28,7 +30,8 @@ module.exports = {
         /**
          * Get the nextRunningTime for the schedule based on the period.
          */
-        const nextRunningTime = UtilService.getNextRunningTime(body.period);
+        const nextRunningTime = UtilService.getNextRunningTime(body.period),
+          identifier = crypto.randomBytes(16).toString('hex');  
 
         if (!nextRunningTime) {
           return next(new Error('invalidSchedulePeriod'));
@@ -37,15 +40,15 @@ module.exports = {
         Schedule
           .create({
             nextRunningTime: nextRunningTime,
+            identifier: identifier,
             period: body.period,
             request: body.request
           })
-          .fetch()
-          .exec((err, schedule) => {
-            return next(err, schedule && schedule.id);
+          .exec((err) => {
+            return next(err, identifier);
           });
       }
-    ], (err, scheduleId) => {
+    ], (err, scheduleIdentifier) => {
       if (err) {
         return res.serverError({
           name: 'serverError',
@@ -55,7 +58,7 @@ module.exports = {
 
       return res.json({
         data: {
-          id: scheduleId
+          id: scheduleIdentifier
         },
         meta: {}
       });
