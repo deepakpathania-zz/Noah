@@ -141,5 +141,54 @@ module.exports = {
         meta: {}
       });
     });
+  },
+
+  updateSchedule: (req, res) => {
+    const { request, period } = req.body;
+
+    Schedule
+      .update({
+        identifier: _.get(req.params, 'identifier')
+      })
+      .set({
+        request,
+        period
+      })
+      .exec((err) => {
+        if (err) {
+          return res.serverError({
+            name: 'serverError',
+            message: err.message
+          });
+        }
+
+        return res.json({
+          data: {},
+          meta: {}
+        });
+      });
+  },
+
+  deleteSchedule: (req, res) => {
+    Schedule
+      .update({
+        identifier: _.get(req.params, 'identifier')
+      })
+      .set({
+        status: 0
+      })
+      .exec((err) => {
+        if (err) {
+          return res.serverError({
+            name: 'serverError',
+            message: err.message
+          });
+        }
+
+        return res.json({
+          data: {},
+          meta: {}
+        });
+      });
   }
 };
