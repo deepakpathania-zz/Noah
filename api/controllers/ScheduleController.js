@@ -141,5 +141,28 @@ module.exports = {
         meta: {}
       });
     });
+  },
+
+  deleteSchedule: (req, res) => {
+    Schedule
+      .update({
+        identifier: _.get(req.params, 'identifier')
+      })
+      .set({
+        status: 0
+      })
+      .exec((err) => {
+        if (err) {
+          return res.serverError({
+            name: 'serverError',
+            message: err.message
+          });
+        }
+
+        return res.json({
+          data: {},
+          meta: {}
+        });
+      });
   }
 };

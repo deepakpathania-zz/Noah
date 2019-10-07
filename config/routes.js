@@ -15,5 +15,6 @@ module.exports.routes = {
   // ScheduleController
   'POST /v1/schedules': 'ScheduleController.createSchedule',
   'GET /v1/schedules': 'ScheduleController.getAllSchedules',
-  'GET /v1/schedules/:identifier': 'ScheduleController.getScheduleRunhistory'
+  'GET /v1/schedules/:identifier': 'ScheduleController.getScheduleRunhistory',
+  'DELETE /v1/schedules/:identifier': 'ScheduleController.deleteSchedule'
 };
