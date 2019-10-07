@@ -13,5 +13,7 @@ module.exports.routes = {
   'GET /knockknock': 'HealthController.check',
 
   // ScheduleController
-  'POST /v1/schedules': 'ScheduleController.createSchedule'
+  'POST /v1/schedules': 'ScheduleController.createSchedule',
+  'GET /v1/schedules': 'ScheduleController.getAllSchedules',
+  'GET /v1/schedules/:identifier': 'ScheduleController.getScheduleRunhistory'
 };

@@ -16,7 +16,9 @@ module.exports.policies = {
   },
 
   ScheduleController: {
-    createSchedule: ['validateCreateSchedule']
+    createSchedule: ['validateCreateSchedule'],
+    getAllSchedules: [],
+    getScheduleRunhistory: []
   }
 
 };

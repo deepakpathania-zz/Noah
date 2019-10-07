@@ -63,5 +63,83 @@ module.exports = {
         meta: {}
       });
     });
+  },
+
+  getAllSchedules: (req, res) => {
+    Schedule
+      .find({
+        status: 1
+      })
+      .exec((err, schedules) => {
+        if (err) {
+          return res.serverError({
+            name: 'serverError',
+            message: err.message
+          });
+        }
+
+        schedules = schedules.map((schedule) => {
+          return {
+            identifier: schedule.identifier,
+            nextRunningTime: schedule.nextRunningTime,
+            request: schedule.request,
+            period: schedule.period
+          }
+        });
+
+        return res.json({
+          data: schedules,
+          meta: {
+            'filter': 'active'
+          }
+        });
+      });
+  },
+
+  getScheduleRunhistory: (req, res) => {
+    async.waterfall([
+      (next) => {
+        Schedule
+          .findOne({
+            identifier: _.get(req.params, 'identifier')
+          })
+          .exec((err, schedule) => {
+            if (err || !schedule) {
+              return next(new Error('scheduleFetchingError'))
+            }
+
+            return next(null, schedule.id);
+          });
+      },
+      (scheduleId, next) => {
+        Runhistory
+          .find({
+            schedule: scheduleId
+          })
+          .exec((err, runhistories) => {
+            return next(err, runhistories);
+          });
+      }
+    ], (err, runhistories) => {
+      if (err) {
+        return res.serverError({
+          name: 'serverError',
+          message: err.message
+        });
+      }
+
+      runhistories = runhistories.map((runhistory) => {
+        return {
+          id: runhistory.id,
+          runTime: runhistory.runTime,
+          responseStatusCode: runhistory.responseStatusCode
+        }
+      });
+
+      return res.json({
+        data: runhistories,
+        meta: {}
+      });
+    });
   }
 };
