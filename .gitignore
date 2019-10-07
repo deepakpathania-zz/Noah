@@ -132,3 +132,4 @@ lib-cov
 *.pid
 
 .vscode
+.nyc_output
