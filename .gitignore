@@ -133,3 +133,4 @@ lib-cov
 
 .vscode
 .nyc_output
+.coveralls.yml
