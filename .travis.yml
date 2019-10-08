@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - 10
+services:
+  - mysql
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS noah_test;'
+install:
+  - npm install
+script:
+  - npm test
