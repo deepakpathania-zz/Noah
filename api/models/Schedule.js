@@ -22,6 +22,10 @@ module.exports = {
     },
     request: {
       type: 'json'
+    },
+    storeResponseBody: {
+      type: 'boolean',
+      defaultsTo: false
     }
   }
 };

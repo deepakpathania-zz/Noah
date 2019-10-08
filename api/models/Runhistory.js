@@ -14,6 +14,9 @@ module.exports = {
     },
     responseStatusCode: {
       type: 'number'
+    },
+    responseBody: {
+      type: 'json'
     }
   }
 };

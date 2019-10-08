@@ -42,7 +42,8 @@ module.exports = {
             nextRunningTime: nextRunningTime,
             identifier: identifier,
             period: body.period,
-            request: body.request
+            request: body.request,
+            storeResponseBody: body.storeResponseBody
           })
           .exec((err) => {
             return next(err, identifier);
@@ -83,7 +84,8 @@ module.exports = {
             identifier: schedule.identifier,
             nextRunningTime: schedule.nextRunningTime,
             request: schedule.request,
-            period: schedule.period
+            period: schedule.period,
+            storeResponseBody: schedule.storeResponseBody
           };
         });
 
@@ -132,7 +134,8 @@ module.exports = {
         return {
           id: runhistory.id,
           runTime: runhistory.runTime,
-          responseStatusCode: runhistory.responseStatusCode
+          responseStatusCode: runhistory.responseStatusCode,
+          responseBody: runhistory.responseBody
         };
       });
 
@@ -144,7 +147,7 @@ module.exports = {
   },
 
   updateSchedule: (req, res) => {
-    const { request, period } = req.body;
+    const { request, period, storeResponseBody } = req.body;
 
     Schedule
       .update({
@@ -152,7 +155,8 @@ module.exports = {
       })
       .set({
         request,
-        period
+        period,
+        storeResponseBody
       })
       .exec((err) => {
         if (err) {

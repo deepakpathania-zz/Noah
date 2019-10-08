@@ -27,7 +27,7 @@ module.exports = {
         }
 
         async.map(schedules, async.reflect((schedule, callback) => {
-          const { request, period } = schedule;
+          const { request, period, storeResponseBody } = schedule;
 
           async.waterfall([
             /**
@@ -35,13 +35,13 @@ module.exports = {
              */
             (cbi) => {
               UtilService.makeRequest(request, (err, response) => {
-                return cbi(err, _.get(response, 'statusCode'), Date.now());
+                return cbi(err, _.get(response, 'statusCode'), Date.now(), _.get(response, 'body'));
               });
             },
             /**
              * Update the `nextRunningTime` based on period.
              */
-            (responseStatusCode, runTime, cbi) => {
+            (responseStatusCode, runTime, responseBody, cbi) => {
               const nextRunningTime = UtilService.getNextRunningTime(period);
 
               Schedule
@@ -52,18 +52,19 @@ module.exports = {
                   nextRunningTime
                 })
                 .exec((err) => {
-                  return cbi(err, responseStatusCode, runTime);
+                  return cbi(err, responseStatusCode, runTime, responseBody);
                 });
             },
             /**
              * Create a run history record for this schedule.
              */
-            (responseStatusCode, runTime, cbi) => {
+            (responseStatusCode, runTime, responseBody, cbi) => {
               Runhistory
                 .create({
                   schedule: schedule.id,
                   runTime: runTime,
-                  responseStatusCode: responseStatusCode
+                  responseStatusCode: responseStatusCode,
+                  responseBody: storeResponseBody ? responseBody : null
                 })
                 .exec((err) => {
                   return cbi(err);
