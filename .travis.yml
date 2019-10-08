@@ -1,14 +1,10 @@
 language: node_js
 node_js:
   - 10
-env:
-  - NODE_ENV=test
-  - MYSQL_HOST=127.0.0.1
-  - MYSQL_USER=root
-  - MYSQL_PASSWORD=''
-  - MYSQL_TEST_DB_NAME='noah_test'
 services:
   - mysql
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS noah_test;'
 install:
   - npm install
 script:
