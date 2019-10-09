@@ -141,7 +141,7 @@ describe('ScheduleController', () => {
               expect(res.body.data).to.be.an('array');
               expect(res.body.data.length).to.equal(1);
               expect(res.body.data[0]).to.have.all.keys(
-                ['identifier', 'period', 'request', 'nextRunningTime']
+                ['identifier', 'period', 'request', 'nextRunningTime', 'storeResponseBody']
               );
 
               return next();
@@ -189,7 +189,7 @@ describe('ScheduleController', () => {
               expect(res.body.data).to.be.an('array');
               expect(res.body.data.length).to.equal(1);
               expect(res.body.data[0]).to.have.all.keys(
-                ['id', 'runTime', 'responseStatusCode']
+                ['id', 'runTime', 'responseStatusCode', 'responseBody']
               );
 
               return next();

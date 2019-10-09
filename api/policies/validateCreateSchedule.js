@@ -47,6 +47,10 @@ const Ajv = require('ajv'),
       start: {
         type: 'boolean',
         enum: [true, false]
+      },
+      storeResponseBody: {
+        type: 'boolean',
+        enum: [true, false]
       }
     },
     required: ['request', 'period']

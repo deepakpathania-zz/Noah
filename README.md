@@ -56,7 +56,8 @@ Noah exposes the following APIs to interact with the system.
           "every": 2,
           "interval": "{{interval}}"
         },
-        "start": true
+        "start": true,
+        "storeResponseBody": true
       }
       ```
         - `request` is a required field. It includes the following required fields:
@@ -73,6 +74,8 @@ Noah exposes the following APIs to interact with the system.
     Accepts one of the following values `['hours', 'days', 'weeks', 'months']`
 
         - `start` is an optional boolean field, false by default. Represents whether or not a request should be made at the time of registering the schedule.
+
+        - `storeResponseBody` is an optional boolean field, false by default. Represents whether or not the response body should be stored while making request.
     - Returns - unique identfier for the created schedule.
       ```js
       {
@@ -88,7 +91,7 @@ Noah exposes the following APIs to interact with the system.
   - Method - `PUT`
   - Request body is similar to create schedule with the following exceptions:
     - `start` is not accepted.
-    - In case you want to edit a `request` or `period` field, entire object needs to be sent.
+    - In case you want to edit a `request`, `storeResponseBody` or `period` field, entire object needs to be sent.
     For example, for updating period from every 2 hours, to every 3 hours, request body would be:
       ```js
       {
@@ -122,7 +125,8 @@ Noah exposes the following APIs to interact with the system.
           "period": {
             "every": 2,
             "interval": "hours"
-          }
+          },
+          "storeResponseBody": true
         }
       ],
       "meta": {
@@ -141,7 +145,8 @@ Noah exposes the following APIs to interact with the system.
         {
           "id": 1,
           "runTime": 1570428480068,
-          "responseStatusCode": 200
+          "responseStatusCode": 200,
+          "responseBody": "hello i am a response body."
         }
       ],
       "meta": {}

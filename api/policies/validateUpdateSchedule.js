@@ -43,6 +43,9 @@ const Ajv = require('ajv'),
           }
         },
         required: ['every', 'interval']
+      },
+      storeResponseBody : {
+        type: 'boolean'
       }
     }
   },
