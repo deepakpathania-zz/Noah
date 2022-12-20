@@ -13,7 +13,7 @@
     "request": "2.88.0",
     "sails": "1.1.0",
     "sails-hook-orm": "2.1.1",
-    "sails-mysql": "1.0.1"
+    "sails-mysql": "3.0.0"
   },
   "devDependencies": {
     "@sailshq/eslint": "4.19.3",
